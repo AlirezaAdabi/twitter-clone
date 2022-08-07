@@ -18,27 +18,27 @@ import {
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 
-const Input = () => {
-  const [input, setInput] = useState<string>("");
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [showEmojis, setShowEmojis] = useState<Boolean>(false);
-  const [loading, setLoading] = useState<Boolean>(false);
-  const filePickerRef = useRef<HTMLInputElement | null>(null);
+const Inpit = () => {
+  const [input, setInput] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showEmojis, setShowEmojis] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const filePickerRef = useRef(null);
 
-  const addImageToPost = (e: any) => {
+  const addImageToPost = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
     }
-    reader.onload = (readerEvent: any) => {
+    reader.onload = (readerEvent) => {
       setSelectedFile(readerEvent.target?.result);
     };
   };
 
-  const addEmoji = (e: any) => {
+  const addEmoji = (e) => {
     let sym = e.unified.split("-");
-    let codesArray: any[] = [];
-    sym.forEach((el: any) => codesArray.push("0x" + el));
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
     let emoji = String.fromCodePoint(...codesArray);
     setInput(input + emoji);
   };
@@ -46,8 +46,6 @@ const Input = () => {
   const sendPost = async () => {
     if (loading) return;
     setLoading(true);
-    console.log(db);
-
     const docRef = await addDoc(collection(db, "posts"), {
       // id: session.user.uid,
       // username: session.user.name,
@@ -165,4 +163,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default Inpit;
