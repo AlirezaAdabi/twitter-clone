@@ -15,6 +15,7 @@ import {
   doc,
   serverTimestamp,
   updateDoc,
+  setDoc,
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 
@@ -46,26 +47,32 @@ const Input = () => {
   const sendPost = async () => {
     if (loading) return;
     setLoading(true);
-    console.log(db);
 
-    const docRef = await addDoc(collection(db, "posts"), {
-      // id: session.user.uid,
-      // username: session.user.name,
-      // userImg: session.user.image,
-      // tag: session.user.tag,
-      text: input,
-      timestamp: serverTimestamp(),
-    });
-
-    const imageRef = ref(storage, `posts/${docRef.id}/image`);
-
-    if (selectedFile) {
-      await uploadString(imageRef, selectedFile, "data_url").then(async () => {
-        const downloadURL = await getDownloadURL(imageRef);
-        await updateDoc(doc(db, "posts", docRef.id), {
-          image: downloadURL,
-        });
+    try {
+      const docRef = await addDoc(collection(db, "posts"), {
+        // id: session.user.uid,
+        // username: session.user.name,
+        // userImg: session.user.image,
+        // tag: session.user.tag,
+        text: input,
+        timestamp: serverTimestamp(),
       });
+
+      const imageRef = ref(storage, `posts/${docRef.id}/image`);
+
+      if (selectedFile) {
+        await uploadString(imageRef, selectedFile, "data_url").then(
+          async () => {
+            const downloadURL = await getDownloadURL(imageRef);
+            await updateDoc(doc(db, "posts", docRef.id), {
+              image: downloadURL,
+            });
+          }
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Some error happened");
     }
 
     setLoading(false);
