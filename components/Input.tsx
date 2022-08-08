@@ -161,6 +161,7 @@ const Input = () => {
                   onChange={addImageToPost}
                   ref={filePickerRef}
                   hidden
+                  accept=".jpg, .png, .jpeg, .gif, .mp4, .bmp, .tif, .tiff|image/*"
                 />
               </div>
 
