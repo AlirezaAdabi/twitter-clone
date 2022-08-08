@@ -18,8 +18,11 @@ import {
   setDoc,
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
+import { useSession } from "next-auth/react";
 
 const Input = () => {
+  const { data: session } = useSession();
+
   const [input, setInput] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [showEmojis, setShowEmojis] = useState<Boolean>(false);
@@ -50,10 +53,10 @@ const Input = () => {
 
     try {
       const docRef = await addDoc(collection(db, "posts"), {
-        // id: session.user.uid,
-        // username: session.user.name,
-        // userImg: session.user.image,
-        // tag: session.user.tag,
+        id: session!.user?.uid,
+        username: session!.user?.name,
+        userImg: session!.user!.image,
+        tag: session!.user?.tag,
         text: input,
         timestamp: serverTimestamp(),
       });
@@ -88,7 +91,7 @@ const Input = () => {
       }`}
     >
       <img
-        src="https://media.istockphoto.com/photos/silhouette-of-profile-guy-in-shirt-with-white-button-in-aqua-menthe-picture-id1206439390?k=20&m=1206439390&s=170667a&w=0&h=wDX4xov95UOzjOgOkTqRurDiTepjhqAA7Q2iFofrO5c="
+        src={session!.user!.image!}
         alt=""
         className="h-11 w-11 cursor-pointer rounded-full"
       />

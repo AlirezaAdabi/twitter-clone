@@ -11,7 +11,9 @@ import {
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
+import { signOut, useSession } from "next-auth/react";
 const Sidebar = () => {
+  const { data: session } = useSession();
   return (
     <div className="fixed hidden h-full flex-col items-center p-2 sm:flex xl:w-[340px] xl:items-start">
       <div className="hoverAnimation flex h-14 w-14 items-center justify-center p-0 xl:ml-24">
@@ -36,17 +38,18 @@ const Sidebar = () => {
       </button>
       <div
         className="hoverAnimation mt-auto ml-auto flex items-center justify-center text-[#d9d9d9] 
-         xl:ml-auto xl:-mr-5
+         xl:ml-auto xl:-mr-5 
       "
+        onClick={() => signOut()}
       >
         <img
-          src="https://media.istockphoto.com/photos/silhouette-of-profile-guy-in-shirt-with-white-button-in-aqua-menthe-picture-id1206439390?k=20&m=1206439390&s=170667a&w=0&h=wDX4xov95UOzjOgOkTqRurDiTepjhqAA7Q2iFofrO5c="
+          src={session?.user?.image!}
           alt=""
           className="h-10 w-10 rounded-full xl:mr-2.5"
         />
         <div className="hidden leading-5 xl:inline">
-          <h4 className="font-bold">Alireza</h4>
-          <p className="text-[#6e767d]">@Alirza.Adabi</p>
+          <h4 className="font-bold">{session?.user?.name}</h4>
+          <p className="text-[#6e767d]">@{session?.user?.tag}</p>
         </div>
         <DotsHorizontalIcon className="ml-10 hidden h-5 xl:inline" />
       </div>

@@ -39,14 +39,14 @@ export const getServerSideProps = async (context: any) => {
   );
   const { data: followResults } = await axios("https://jsonkeeper.com/b/WWMJ");
   const providers = await getProviders();
-  // const session = await getSession(context);
+  const session = await getSession(context);
 
   return {
     props: {
       trendingResults,
       followResults,
       providers,
-      // session,
+      session,
     },
   };
 };

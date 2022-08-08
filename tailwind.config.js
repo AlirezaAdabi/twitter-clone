@@ -5,7 +5,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "login-pattern": "url('/assets/twitter-banner.webp')",
+      },
+    },
   },
   plugins: [],
 };
