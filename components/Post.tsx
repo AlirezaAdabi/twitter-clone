@@ -9,7 +9,6 @@ import {
   DocumentData,
 } from "@firebase/firestore";
 import {
-  ChartBarIcon,
   ChatIcon,
   DotsHorizontalIcon,
   HeartIcon,
@@ -17,10 +16,7 @@ import {
   SwitchHorizontalIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import {
-  HeartIcon as HeartIconFilled,
-  ChatIcon as ChatIconFilled,
-} from "@heroicons/react/solid";
+import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -86,7 +82,7 @@ const Post = ({ id, post, postPage }: Props) => {
   return (
     <div
       className="flex cursor-pointer border-b border-gray-700 p-3"
-      onClick={() => router.push(`/${id}`)}
+      //   onClick={() => router.push(`/${id}`)}
     >
       {!postPage && (
         <img src={post?.userImg} className="mr-4 h-11 w-11 rounded-full" />
@@ -220,14 +216,6 @@ const Post = ({ id, post, postPage }: Props) => {
             }}
           >
             <ShareIcon className="h-5 group-hover:text-[#1d9bf0]" />
-          </div>
-          <div
-            className="icon group"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <ChartBarIcon className="h-5 group-hover:text-[#1d9bf0]" />
           </div>
         </div>
       </div>

@@ -9,8 +9,8 @@ const Login = ({ providers }: Props) => {
     <div className="flex h-screen flex-col items-center space-y-16 bg-[url('/assets/twitter-banner.webp')] bg-cover bg-center bg-no-repeat  pt-48">
       <Image
         src={"/assets/twitter-icon-svg-28.jpeg"}
-        width={170}
-        height={170}
+        width={200}
+        height={200}
         objectFit="contain"
       />
       <div>
