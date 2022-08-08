@@ -10,8 +10,6 @@ export default NextAuth({
   ],
   callbacks: {
     async session({ session, token }) {
-      console.log({ token });
-
       session.user!.tag = session.user
         ?.name!.split(" ")
         .join("")
