@@ -10,6 +10,8 @@ export default NextAuth({
   ],
   callbacks: {
     async session({ session, token }) {
+      console.log({ token });
+
       session.user!.tag = session.user
         ?.name!.split(" ")
         .join("")
@@ -19,4 +21,5 @@ export default NextAuth({
       return session;
     },
   },
+  secret: process.env.JWT_SECRET,
 });
