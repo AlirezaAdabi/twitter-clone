@@ -18,10 +18,12 @@ import { db } from "../lib/firebase";
 import { ArrowLeftIcon } from "@heroicons/react/solid";
 import Head from "next/head";
 import Login from "../components/Login";
+import Comment from "../components/Comment";
+import Widgets from "../components/Widgets";
 
 interface Props {
-  trendingResults: Object;
-  followResults: Object;
+  trendingResults: Array<any>;
+  followResults: Array<any>;
   providers: Object;
 }
 
@@ -76,7 +78,18 @@ const PostPage = ({ trendingResults, followResults, providers }: Props) => {
             Tweet
           </div>
           <Post id={id} post={post!} postPage />
+          {comments.length > 0 && (
+            <div className="pb-72">
+              {comments.map((comment: DocumentData) => (
+                <Comment key={comment.id} comment={comment.data()} />
+              ))}
+            </div>
+          )}
         </div>
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
         {isOpen && <Modal />}
       </main>
     </div>

@@ -7,10 +7,11 @@ import Login from "../components/Login";
 import Modal from "../components/Modal";
 import { modalState } from "../atoms/modalAtom";
 import { useRecoilState } from "recoil";
+import Widgets from "../components/Widgets";
 
 interface Props {
-  trendingResults: Object;
-  followResults: Object;
+  trendingResults: Array<any>;
+  followResults: Array<any>;
   providers: Object;
 }
 
@@ -28,7 +29,10 @@ const Home = ({ trendingResults, followResults, providers }: Props) => {
       <main className="mx-auto flex min-h-screen max-w-[1500px] bg-black">
         <Sidebar />
         <Feed />
-        {/* Widgets */}
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />{" "}
         {isOpen && <Modal />}
       </main>
     </div>
