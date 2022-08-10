@@ -28,7 +28,7 @@ import { db } from "../lib/firebase";
 interface Props {
   id: string;
   post: DocumentData;
-  postPage?: string;
+  postPage?: Boolean;
 }
 const Post = ({ id, post, postPage }: Props) => {
   const { data: session } = useSession();
@@ -82,7 +82,7 @@ const Post = ({ id, post, postPage }: Props) => {
   return (
     <div
       className="flex cursor-pointer border-b border-gray-700 p-3"
-      //   onClick={() => router.push(`/${id}`)}
+      onClick={() => router.push(`/${id}`)}
     >
       {!postPage && (
         <img src={post?.userImg} className="mr-4 h-11 w-11 rounded-full" />
@@ -108,7 +108,7 @@ const Post = ({ id, post, postPage }: Props) => {
               <span
                 className={`text-sm sm:text-[15px] ${!postPage && "ml-1.5"}`}
               >
-                @{post.tag}
+                @{post?.tag}
               </span>
             </div>{" "}
             ·{" "}

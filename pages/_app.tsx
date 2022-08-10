@@ -7,11 +7,11 @@ import { RecoilRoot } from "recoil";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
+      <Head>
+        <title>Twitter</title>
+        <link rel="icon" href="/twitter.png" />
+      </Head>
       <RecoilRoot>
-        <Head>
-          <title>Twitter</title>
-          <link rel="icon" href="/twitter.png" />
-        </Head>
         <Component {...pageProps} />
       </RecoilRoot>
     </SessionProvider>
